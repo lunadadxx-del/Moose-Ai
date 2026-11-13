@@ -14,44 +14,35 @@ export const MooseLogo: React.FC<MooseLogoProps> = ({
   showText = true,
   className = '',
 }) => {
+  // Original image is 1024x682 (Aspect ratio: 1.50)
   const sizeMap = {
-    sm: { box: 'w-8 h-8', imgWidth: 32, imgHeight: 22, text: 'text-sm', badge: 'text-[10px]' },
-    md: { box: 'w-10 h-10', imgWidth: 40, imgHeight: 27, text: 'text-base', badge: 'text-[11px]' },
-    lg: { box: 'w-14 h-14', imgWidth: 56, imgHeight: 38, text: 'text-xl', badge: 'text-xs' },
+    sm: { width: 33, height: 22, text: 'text-base' },
+    md: { width: 39, height: 26, text: 'text-lg' },
+    lg: { width: 48, height: 32, text: 'text-xl' },
   };
 
   const currentSize = sizeMap[size];
 
   return (
-    <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      {/* Official MOOSE AI Logo with uncompromised aspect ratio */}
-      <div
-        className={`relative ${currentSize.box} rounded-xl overflow-hidden flex items-center justify-center bg-white border border-slate-200 shadow-sm shrink-0 p-0.5`}
-      >
+    <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
+      {/* Official MOOSE AI Logo with uncompromised aspect ratio and clean rendering */}
+      <div className="relative shrink-0 flex items-center justify-center">
         <Image
           src="/moose-logo.png"
-          alt="MOOSE AI Official Logo"
-          width={currentSize.imgWidth}
-          height={currentSize.imgHeight}
-          className="w-full h-auto object-contain"
+          alt="MOOSE AI Logo"
+          width={currentSize.width}
+          height={currentSize.height}
+          style={{ width: `${currentSize.width}px`, height: `${currentSize.height}px` }}
+          className="object-contain"
           priority
         />
       </div>
 
-      {/* Brand Typography */}
+      {/* Brand Typography horizontally aligned */}
       {showText && (
-        <div className="flex flex-col leading-tight">
-          <div className="flex items-center gap-1.5">
-            <span className={`font-bold tracking-tight text-[#0F172A] ${currentSize.text}`}>
-              MOOSE
-            </span>
-            <span className={`font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#1646D8] to-[#16A5F5] ${currentSize.text}`}>
-              AI
-            </span>
-          </div>
-          <span className={`font-medium tracking-wide text-slate-500 ${currentSize.badge}`}>
-            Major Project
-          </span>
+        <div className="flex items-center gap-1 font-bold tracking-tight leading-none">
+          <span className={`text-[#111827] ${currentSize.text}`}>MOOSE</span>
+          <span className={`text-[#2563EB] ${currentSize.text}`}>AI</span>
         </div>
       )}
     </div>

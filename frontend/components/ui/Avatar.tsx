@@ -6,7 +6,7 @@ import { User } from 'lucide-react';
 
 interface AvatarProps {
   role: 'assistant' | 'user';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
@@ -16,10 +16,9 @@ export const Avatar: React.FC<AvatarProps> = ({
   className = '',
 }) => {
   const sizeMap = {
-    sm: { container: 'w-7 h-7 text-xs', px: 28 },
-    md: { container: 'w-8 h-8 text-sm', px: 32 },
-    lg: { container: 'w-10 h-10 text-base', px: 40 },
-    xl: { container: 'w-24 h-24 text-3xl', px: 96 },
+    sm: { container: 'w-7 h-7', logoW: 18, logoH: 12 },
+    md: { container: 'w-8 h-8', logoW: 22, logoH: 15 },
+    lg: { container: 'w-10 h-10', logoW: 28, logoH: 19 },
   };
 
   const currentSize = sizeMap[size];
@@ -27,15 +26,16 @@ export const Avatar: React.FC<AvatarProps> = ({
   if (role === 'assistant') {
     return (
       <div
-        className={`relative ${currentSize.container} rounded-full overflow-hidden border border-slate-200 bg-white shadow-sm flex items-center justify-center p-0.5 shrink-0 ${className}`}
+        className={`relative ${currentSize.container} rounded-full border border-blue-100 bg-blue-50/80 flex items-center justify-center shrink-0 shadow-2xs ${className}`}
       >
         <Image
           src="/moose-logo.png"
           alt="Moose AI Assistant"
-          width={currentSize.px}
-          height={currentSize.px}
-          className="w-full h-full object-contain"
-          priority={size === 'xl'}
+          width={currentSize.logoW}
+          height={currentSize.logoH}
+          style={{ width: `${currentSize.logoW}px`, height: `${currentSize.logoH}px` }}
+          className="object-contain"
+          priority
         />
       </div>
     );
@@ -43,9 +43,9 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div
-      className={`relative ${currentSize.container} rounded-full flex items-center justify-center font-medium bg-gradient-to-tr from-[#1646D8] to-[#16A5F5] text-white shadow-sm shrink-0 ${className}`}
+      className={`relative ${currentSize.container} rounded-full flex items-center justify-center font-medium bg-[#111827] text-white shrink-0 shadow-2xs ${className}`}
     >
-      <User className="w-1/2 h-1/2 text-white" />
+      <User className="w-4 h-4 text-slate-100" />
     </div>
   );
 };

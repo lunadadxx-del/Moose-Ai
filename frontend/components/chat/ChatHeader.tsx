@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { APP_CONFIG } from '@/lib/constants';
+import { MooseLogo } from '../ui/MooseLogo';
 import {
-  Menu,
+  PanelLeft,
   ChevronDown,
   Sparkles,
   Share2,
@@ -17,6 +18,7 @@ interface ChatHeaderProps {
   isDemoActive: boolean;
   onToggleDemo: () => void;
   onOpenSettings: () => void;
+  isMobile?: boolean;
 }
 
 export const ChatHeader: React.FC<ChatHeaderProps> = ({
@@ -26,33 +28,45 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
   isDemoActive,
   onToggleDemo,
   onOpenSettings,
+  isMobile = false,
 }) => {
   return (
-    <header className="h-14 px-4 flex items-center justify-between border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0 z-30 select-none">
-      {/* Left: Sidebar Toggle & Model Selector */}
+    <header className="h-14 px-4 flex items-center justify-between border-b border-[#E5E7EB] bg-white sticky top-0 z-30 select-none">
+      {/* Left: Sidebar Toggle Button & Mobile Brand */}
       <div className="flex items-center gap-3">
+        {/* Sidebar Toggle Button (Desktop & Mobile) */}
         <button
           onClick={onToggleSidebar}
-          className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors md:hidden cursor-pointer"
-          aria-label="Toggle navigation menu"
+          className="p-2 rounded-xl text-[#64748B] hover:text-[#111827] hover:bg-slate-100 transition-colors cursor-pointer"
+          aria-label="Toggle sidebar"
+          title={isSidebarOpen ? 'Collapse sidebar' : 'Open sidebar'}
         >
-          <Menu className="w-5 h-5" />
+          <PanelLeft className="w-4 h-4" />
         </button>
 
-        {/* Model Selector Pill / Badge */}
-        <div className="relative group">
-          <button
-            onClick={onOpenSettings}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 border border-slate-200 text-xs text-slate-800 font-medium transition-all shadow-2xs cursor-pointer"
-          >
-            <div className="w-2 h-2 rounded-full bg-[#16A5F5] animate-pulse" />
-            <span className="font-bold text-[#0F172A]">MOOSE AI</span>
-            <span className="text-slate-500 font-normal hidden sm:inline">
-              {APP_CONFIG.modelName}
-            </span>
-            <ChevronDown className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-800 transition-transform" />
-          </button>
-        </div>
+        {/* When sidebar is closed on desktop or on mobile, show the logo and brand */}
+        {(!isSidebarOpen || isMobile) && (
+          <div className="flex items-center pl-1">
+            <MooseLogo size="sm" showText={true} />
+          </div>
+        )}
+
+        {/* Model Selector Pill (when sidebar is open or on desktop) */}
+        {isSidebarOpen && !isMobile && (
+          <div className="relative">
+            <button
+              onClick={onOpenSettings}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 border border-[#E5E7EB] text-xs text-[#111827] font-medium transition-all cursor-pointer"
+            >
+              <div className="w-2 h-2 rounded-full bg-[#2563EB]" />
+              <span className="font-semibold text-[#111827]">Moose AI</span>
+              <span className="text-[#64748B] font-normal hidden lg:inline">
+                {APP_CONFIG.modelName}
+              </span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#64748B]" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Right: Actions */}
@@ -60,14 +74,14 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
         {/* Demo Mode Toggle */}
         <button
           onClick={onToggleDemo}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all border cursor-pointer ${
             isDemoActive
-              ? 'bg-blue-50 text-[#1646D8] border-blue-200 shadow-2xs'
-              : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-200'
+              ? 'bg-blue-50 text-[#2563EB] border-blue-200'
+              : 'bg-white text-[#374151] hover:bg-slate-50 border-[#E5E7EB]'
           }`}
           title="Toggle sample conversation"
         >
-          <Sparkles className="w-3.5 h-3.5 text-[#1646D8]" />
+          <Sparkles className="w-3.5 h-3.5 text-[#2563EB]" />
           <span className="hidden sm:inline">
             {isDemoActive ? 'Viewing Sample Chat' : 'Preview Sample Chat'}
           </span>
@@ -77,7 +91,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
         {/* Share Button (Placeholder) */}
         <button
           onClick={() => alert('Share link generation will be connected in Phase 2!')}
-          className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+          className="p-2 rounded-xl text-[#64748B] hover:text-[#111827] hover:bg-slate-100 transition-colors cursor-pointer"
           title="Share conversation"
         >
           <Share2 className="w-4 h-4" />
@@ -86,8 +100,8 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
         {/* Settings Button */}
         <button
           onClick={onOpenSettings}
-          className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
-          title="Model Parameters & Settings"
+          className="p-2 rounded-xl text-[#64748B] hover:text-[#111827] hover:bg-slate-100 transition-colors cursor-pointer"
+          title="Settings & Model Specs"
         >
           <SlidersHorizontal className="w-4 h-4" />
         </button>

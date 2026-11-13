@@ -12,8 +12,6 @@ export function useSidebar() {
       setIsMobile(mobile);
       if (mobile) {
         setIsOpen(false);
-      } else {
-        setIsOpen(true);
       }
     };
 

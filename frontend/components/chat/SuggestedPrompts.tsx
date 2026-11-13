@@ -15,38 +15,38 @@ export const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({
   const getIcon = (type: SuggestedPrompt['icon']) => {
     switch (type) {
       case 'lightbulb':
-        return <Lightbulb className="w-5 h-5 text-amber-500" />;
+        return <Lightbulb className="w-4 h-4 text-[#2563EB]" />;
       case 'code':
-        return <Code2 className="w-5 h-5 text-[#1646D8]" />;
+        return <Code2 className="w-4 h-4 text-[#2563EB]" />;
       case 'file-text':
-        return <FileText className="w-5 h-5 text-indigo-500" />;
+        return <FileText className="w-4 h-4 text-[#2563EB]" />;
       case 'compass':
-        return <Compass className="w-5 h-5 text-emerald-600" />;
+        return <Compass className="w-4 h-4 text-[#2563EB]" />;
       default:
-        return <Lightbulb className="w-5 h-5 text-[#1646D8]" />;
+        return <Lightbulb className="w-4 h-4 text-[#2563EB]" />;
     }
   };
 
   return (
-    <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-3 px-4">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
       {SUGGESTED_PROMPTS.map((item) => (
         <button
           key={item.id}
           onClick={() => onSelectPrompt(item.prompt)}
-          className="group relative flex flex-col justify-between p-4 rounded-2xl bg-white hover:bg-slate-50/80 border border-slate-200 hover:border-blue-300 text-left transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-blue-500/5 hover:-translate-y-0.5 cursor-pointer"
+          className="group relative flex flex-col justify-between p-4 rounded-2xl bg-white hover:bg-slate-50/70 border border-[#E5E7EB] hover:border-blue-200 transition-all duration-150 shadow-2xs hover:shadow-xs cursor-pointer"
         >
           <div className="flex items-start justify-between w-full mb-2">
-            <div className="p-2 rounded-xl bg-slate-100/80 border border-slate-200/60 group-hover:bg-white group-hover:border-blue-200 transition-colors">
+            <div className="p-2 rounded-xl bg-blue-50/70 text-[#2563EB] group-hover:bg-blue-100/60 transition-colors">
               {getIcon(item.icon)}
             </div>
-            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#1646D8] transition-colors opacity-0 group-hover:opacity-100" />
+            <ArrowUpRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#2563EB] transition-colors opacity-0 group-hover:opacity-100" />
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1646D8] transition-colors">
+            <h3 className="text-xs font-semibold text-[#111827] group-hover:text-[#2563EB] transition-colors">
               {item.title}
             </h3>
-            <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+            <p className="text-[11px] text-[#64748B] mt-1 line-clamp-2 leading-relaxed">
               {item.description}
             </p>
           </div>

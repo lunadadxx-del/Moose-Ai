@@ -18,13 +18,13 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   const [input, setInput] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto-resize textarea height as text grows
+  // Auto-resize textarea height as content changes
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${Math.min(
         textareaRef.current.scrollHeight,
-        200
+        180
       )}px`;
     }
   }, [input]);
@@ -48,17 +48,17 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   const handleAttachmentClick = () => {
-    alert('File attachment & multimodal ingestion will be enabled in Phase 2 (RAG & FastApi backend).');
+    alert('File attachment will be enabled in Phase 2 with our FastAPI inference backend.');
   };
 
   const handleVoiceClick = () => {
-    alert('Voice input and audio transcription module will be integrated in Phase 2.');
+    alert('Voice input will be integrated in Phase 2.');
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 pb-4 select-none bg-white">
-      {/* Floating Light-Theme Input Box */}
-      <div className="relative rounded-2xl bg-white border border-slate-200 hover:border-slate-300 focus-within:border-[#1646D8] focus-within:ring-3 focus-within:ring-[#1646D8]/15 shadow-sm transition-all duration-200">
+    <div className="w-full max-w-3xl mx-auto px-4 pb-4 pt-1 select-none bg-white">
+      {/* Centered Input Box */}
+      <div className="relative rounded-2xl bg-white border border-[#E5E7EB] hover:border-slate-300 focus-within:border-[#2563EB] focus-within:ring-2 focus-within:ring-blue-100 shadow-2xs transition-all">
         <form onSubmit={handleSubmit} className="flex flex-col">
           {/* Text Area */}
           <textarea
@@ -69,18 +69,18 @@ export const MessageInput: React.FC<MessageInputProps> = ({
             disabled={disabled}
             placeholder={placeholder}
             rows={1}
-            className="w-full bg-transparent px-4 pt-3.5 pb-2 text-sm text-[#0F172A] placeholder-slate-400 resize-none outline-none max-h-48 custom-scrollbar leading-relaxed"
+            className="w-full bg-transparent px-4 pt-3.5 pb-2 text-sm text-[#111827] placeholder:text-[#94A3B8] resize-none outline-none max-h-44 custom-scrollbar leading-relaxed"
           />
 
-          {/* Action Row: Left Icons + Right Send Button */}
+          {/* Action Row: Left Controls & Right Send Button */}
           <div className="flex items-center justify-between px-3 pb-2.5 pt-1">
-            {/* Left Icons: Attachment + Voice input */}
+            {/* Left Controls: Attachment & Mic */}
             <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={handleAttachmentClick}
-                className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
-                title="Attach document or image (Phase 2 RAG)"
+                className="p-1.5 rounded-lg text-[#64748B] hover:text-[#111827] hover:bg-slate-100 transition-colors cursor-pointer"
+                title="Attach file (Phase 2)"
                 aria-label="Attach file"
               >
                 <Paperclip className="w-4 h-4" />
@@ -89,7 +89,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
               <button
                 type="button"
                 onClick={handleVoiceClick}
-                className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-[#64748B] hover:text-[#111827] hover:bg-slate-100 transition-colors cursor-pointer"
                 title="Voice input (Phase 2)"
                 aria-label="Voice input"
               >
@@ -97,20 +97,12 @@ export const MessageInput: React.FC<MessageInputProps> = ({
               </button>
             </div>
 
-            {/* Right: Send Button */}
+            {/* Right: Helper counter & Send Button */}
             <div className="flex items-center gap-2">
-              <span className="text-[11px] text-slate-400 hidden sm:inline">
-                {input.length > 0 ? `${input.length} chars` : 'Shift + Enter for new line'}
-              </span>
-
               <button
                 type="submit"
                 disabled={!input.trim() || disabled}
-                className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 ${
-                  input.trim() && !disabled
-                    ? 'bg-gradient-to-r from-[#1646D8] to-[#16A5F5] text-white shadow-sm shadow-blue-500/25 hover:scale-105 active:scale-95 cursor-pointer'
-                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                }`}
+                className="w-8 h-8 rounded-xl flex items-center justify-center bg-[#2563EB] text-white hover:bg-blue-700 disabled:bg-slate-100 disabled:text-slate-300 transition-all cursor-pointer disabled:cursor-not-allowed shadow-2xs"
                 aria-label="Send message"
               >
                 <ArrowUp className="w-4 h-4 stroke-[2.5]" />
@@ -120,9 +112,9 @@ export const MessageInput: React.FC<MessageInputProps> = ({
         </form>
       </div>
 
-      {/* Subtle Bottom Disclaimer */}
-      <div className="text-center mt-2.5">
-        <p className="text-[11px] text-slate-400 tracking-wide">
+      {/* Clean Disclaimer */}
+      <div className="text-center mt-2">
+        <p className="text-xs text-[#64748B] tracking-normal">
           {APP_CONFIG.disclaimer}
         </p>
       </div>

@@ -1,9 +1,8 @@
-/* MOOSE AI — Light Theme Enhancements & Custom Scrollbars */
+/* MOOSE AI — Clean Minimal Light Theme Utilities */
 
-/* Sleek light scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -11,12 +10,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #E5E7EB;
   border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #CBD5E1;
 }
 
 @keyframes fadeIn {
@@ -31,5 +30,5 @@
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.15s ease-out forwards;
 }

@@ -3,14 +3,13 @@
 
 :root {
   --background: #FFFFFF;
-  --foreground: #0F172A;
+  --foreground: #111827;
   --sidebar-bg: #F8FAFC;
   --surface: #FFFFFF;
   --surface-hover: #F1F5F9;
-  --border: #E2E8F0;
-  --accent-blue: #1646D8;
-  --accent-cyan: #16A5F5;
-  --muted-text: #64748B;
+  --border: #E5E7EB;
+  --primary-blue: #2563EB;
+  --secondary-text: #64748B;
 }
 
 html,
@@ -19,7 +18,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #FFFFFF;
-  color: #0F172A;
+  color: #111827;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

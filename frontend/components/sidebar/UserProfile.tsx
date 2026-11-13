@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { DEFAULT_USER } from '@/lib/constants';
-import { MoreHorizontal } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
 interface UserProfileProps {
   collapsed?: boolean;
@@ -14,31 +14,31 @@ export const UserProfile: React.FC<UserProfileProps> = ({
   onOpenSettings,
 }) => {
   return (
-    <div className="pt-2 border-t border-slate-200">
+    <div className="pt-2 border-t border-[#E5E7EB]">
       <button
         onClick={onOpenSettings}
         className={`w-full flex items-center ${
           collapsed ? 'justify-center px-1' : 'justify-between px-2.5'
-        } py-2 rounded-xl text-left hover:bg-slate-100 transition-colors group cursor-pointer`}
+        } py-2 rounded-xl text-left hover:bg-slate-200/50 transition-colors group cursor-pointer`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
-          {/* Avatar with status indicator */}
+          {/* Avatar with subtle status */}
           <div className="relative shrink-0">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1646D8] to-[#16A5F5] text-white flex items-center justify-center font-semibold text-xs shadow-xs">
+            <div className="w-8 h-8 rounded-full bg-[#111827] text-white flex items-center justify-center font-semibold text-xs shadow-2xs">
               {DEFAULT_USER.name.charAt(0)}
             </div>
             <span
-              className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"
+              className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-[#F8FAFC]"
               title="Online"
             />
           </div>
 
           {!collapsed && (
             <div className="min-w-0 flex-1">
-              <div className="text-sm font-semibold text-[#0F172A] truncate">
+              <div className="text-sm font-semibold text-[#111827] truncate leading-tight">
                 {DEFAULT_USER.name}
               </div>
-              <div className="text-[11px] text-slate-500 truncate">
+              <div className="text-[11px] text-[#64748B] truncate mt-0.5">
                 {DEFAULT_USER.role}
               </div>
             </div>
@@ -46,8 +46,8 @@ export const UserProfile: React.FC<UserProfileProps> = ({
         </div>
 
         {!collapsed && (
-          <div className="text-slate-400 group-hover:text-slate-600 transition-colors">
-            <MoreHorizontal className="w-4 h-4" />
+          <div className="text-[#64748B] group-hover:text-[#111827] transition-colors">
+            <Settings className="w-4 h-4" />
           </div>
         )}
       </button>

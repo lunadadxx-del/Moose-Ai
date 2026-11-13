@@ -35,7 +35,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen w-full bg-white text-[#0F172A] overflow-hidden font-sans">
+    <div className="flex h-screen w-full bg-white text-[#111827] overflow-hidden font-sans">
       {/* Sidebar Navigation */}
       <Sidebar
         isOpen={isSidebarOpen}
@@ -60,6 +60,7 @@ export default function Home() {
           isDemoActive={isDemoActive}
           onToggleDemo={toggleDemo}
           onOpenSettings={() => setIsSettingsOpen(true)}
+          isMobile={isMobile}
         />
 
         {/* Dynamic Chat Canvas: Welcome Screen or Message Thread */}
@@ -73,7 +74,7 @@ export default function Home() {
           )}
 
           {/* Large Centered Input Box */}
-          <div className="shrink-0 w-full pt-2 bg-white">
+          <div className="shrink-0 w-full pt-1 bg-white">
             <MessageInput onSendMessage={sendMessage} />
           </div>
         </div>
