@@ -1,0 +1,57 @@
+'use client';
+
+import React from 'react';
+import { SUGGESTED_PROMPTS } from '@/lib/constants';
+import { SuggestedPrompt } from '@/types/chat';
+import { Lightbulb, Code2, FileText, Compass, ArrowUpRight } from 'lucide-react';
+
+interface SuggestedPromptsProps {
+  onSelectPrompt: (prompt: string) => void;
+}
+
+export const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({
+  onSelectPrompt,
+}) => {
+  const getIcon = (type: SuggestedPrompt['icon']) => {
+    switch (type) {
+      case 'lightbulb':
+        return <Lightbulb className="w-5 h-5 text-amber-400" />;
+      case 'code':
+        return <Code2 className="w-5 h-5 text-sky-400" />;
+      case 'file-text':
+        return <FileText className="w-5 h-5 text-purple-400" />;
+      case 'compass':
+        return <Compass className="w-5 h-5 text-emerald-400" />;
+      default:
+        return <Lightbulb className="w-5 h-5 text-sky-400" />;
+    }
+  };
+
+  return (
+    <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-3 px-4">
+      {SUGGESTED_PROMPTS.map((item) => (
+        <button
+          key={item.id}
+          onClick={() => onSelectPrompt(item.prompt)}
+          className="group relative flex flex-col justify-between p-4 rounded-2xl bg-[#141824]/90 hover:bg-[#1B2132] border border-slate-800/80 hover:border-slate-700/80 text-left transition-all duration-200 hover:shadow-lg hover:shadow-cyan-950/20 hover:-translate-y-0.5 cursor-pointer"
+        >
+          <div className="flex items-start justify-between w-full mb-2">
+            <div className="p-2 rounded-xl bg-[#191F2F] border border-slate-700/50 group-hover:border-slate-600 transition-colors">
+              {getIcon(item.icon)}
+            </div>
+            <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-sky-400 transition-colors opacity-0 group-hover:opacity-100" />
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-slate-200 group-hover:text-white transition-colors">
+              {item.title}
+            </h3>
+            <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+};

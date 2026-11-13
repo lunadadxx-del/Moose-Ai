@@ -1,0 +1,31 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mooseGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#0EA5E9" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2333" />
+      <stop offset="100%" stop-color="#11141D" />
+    </linearGradient>
+  </defs>
+  <!-- Background Shield/Rounded Tile -->
+  <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#bgGrad)" stroke="#2D3548" stroke-width="1.5" />
+  
+  <!-- Modern Geometric Moose Head & Antlers -->
+  <!-- Left Antler -->
+  <path d="M16 16L12 11M16 16L19 11M16 16L17 21M12 11L9 12M19 11L21 8" stroke="url(#mooseGlow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Antler -->
+  <path d="M32 16L36 11M32 16L29 11M32 16L31 21M36 11L39 12M29 11L27 8" stroke="url(#mooseGlow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Stylized Geometric Moose Crown / Bridge -->
+  <path d="M17 21C20 23 28 23 31 21L27 28L24 33L21 28L17 21Z" fill="#181D29" stroke="url(#mooseGlow)" stroke-width="1.8" stroke-linejoin="round"/>
+  
+  <!-- Neural Nodes / Antler Tips Glow -->
+  <circle cx="9" cy="12" r="1.5" fill="#38BDF8" />
+  <circle cx="21" cy="8" r="1.5" fill="#38BDF8" />
+  <circle cx="39" cy="12" r="1.5" fill="#38BDF8" />
+  <circle cx="27" cy="8" r="1.5" fill="#38BDF8" />
+  <circle cx="24" cy="27" r="2" fill="#38BDF8" />
+</svg>

@@ -1,0 +1,89 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Sidebar } from '@/components/sidebar/Sidebar';
+import { ChatHeader } from '@/components/chat/ChatHeader';
+import { WelcomeScreen } from '@/components/chat/WelcomeScreen';
+import { MessageList } from '@/components/chat/MessageList';
+import { MessageInput } from '@/components/chat/MessageInput';
+import { SettingsModal } from '@/components/ui/SettingsModal';
+import { useSidebar } from '@/hooks/useSidebar';
+import { useChat } from '@/hooks/useChat';
+
+export default function Home() {
+  const {
+    isOpen: isSidebarOpen,
+    isMobile,
+    toggle: toggleSidebar,
+    close: closeSidebar,
+  } = useSidebar();
+
+  const {
+    messages,
+    activeSessionId,
+    isDemoActive,
+    sendMessage,
+    resetChat,
+    toggleDemo,
+    selectChat,
+  } = useChat();
+
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const handleSelectPrompt = (prompt: string) => {
+    sendMessage(prompt);
+  };
+
+  return (
+    <div className="flex h-screen w-full bg-[#0B0E14] text-slate-100 overflow-hidden font-sans">
+      {/* Sidebar Navigation */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onToggle={toggleSidebar}
+        selectedChatId={activeSessionId}
+        onSelectChat={(session) => {
+          selectChat(session);
+          if (isMobile) closeSidebar();
+        }}
+        onNewChat={resetChat}
+        onOpenSettings={() => setIsSettingsOpen(true)}
+        isMobile={isMobile}
+      />
+
+      {/* Main Content Area */}
+      <main className="flex-1 flex flex-col h-full min-w-0 bg-[#0F121A] relative overflow-hidden">
+        {/* Chat Header */}
+        <ChatHeader
+          onToggleSidebar={toggleSidebar}
+          isSidebarOpen={isSidebarOpen}
+          onResetChat={resetChat}
+          isDemoActive={isDemoActive}
+          onToggleDemo={toggleDemo}
+          onOpenSettings={() => setIsSettingsOpen(true)}
+        />
+
+        {/* Dynamic Chat Canvas: Welcome Screen or Message Thread */}
+        <div className="flex-1 flex flex-col min-h-0 relative">
+          {messages.length === 0 ? (
+            <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col justify-center">
+              <WelcomeScreen onSelectPrompt={handleSelectPrompt} />
+            </div>
+          ) : (
+            <MessageList messages={messages} />
+          )}
+
+          {/* Large Centered Input Box */}
+          <div className="shrink-0 w-full pt-2">
+            <MessageInput onSendMessage={sendMessage} />
+          </div>
+        </div>
+      </main>
+
+      {/* System Settings & Model Configuration Modal */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
+    </div>
+  );
+}
