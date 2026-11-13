@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Bot, User } from 'lucide-react';
+import { User } from 'lucide-react';
 
 interface AvatarProps {
   role: 'assistant' | 'user';
@@ -27,14 +27,14 @@ export const Avatar: React.FC<AvatarProps> = ({
   if (role === 'assistant') {
     return (
       <div
-        className={`relative ${currentSize.container} rounded-full overflow-hidden border border-sky-400/30 bg-[#121520] shadow-md shadow-sky-950/50 shrink-0 ${className}`}
+        className={`relative ${currentSize.container} rounded-full overflow-hidden border border-slate-200 bg-white shadow-sm flex items-center justify-center p-0.5 shrink-0 ${className}`}
       >
         <Image
-          src="/moose-avatar.png"
+          src="/moose-logo.png"
           alt="Moose AI Assistant"
           width={currentSize.px}
           height={currentSize.px}
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-contain"
           priority={size === 'xl'}
         />
       </div>
@@ -43,9 +43,9 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div
-      className={`relative ${currentSize.container} rounded-full flex items-center justify-center font-medium bg-gradient-to-tr from-indigo-600 to-sky-500 text-white border border-indigo-400/30 shadow-md shadow-indigo-950/40 shrink-0 ${className}`}
+      className={`relative ${currentSize.container} rounded-full flex items-center justify-center font-medium bg-gradient-to-tr from-[#1646D8] to-[#16A5F5] text-white shadow-sm shrink-0 ${className}`}
     >
-      <User className="w-1/2 h-1/2" />
+      <User className="w-1/2 h-1/2 text-white" />
     </div>
   );
 };

@@ -9,8 +9,6 @@ import {
   Check,
   ThumbsUp,
   ThumbsDown,
-  RotateCcw,
-  Sparkles,
 } from 'lucide-react';
 
 interface MessageItemProps {
@@ -30,7 +28,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
     }
   };
 
-  // Helper function to render text containing code blocks nicely
+  // Helper function to render text containing code blocks in a clean light theme
   const renderFormattedContent = (content: string) => {
     const parts = content.split(/(```[\s\S]*?```)/g);
 
@@ -45,27 +43,27 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
 
       // Render regular paragraphs, bolding, and headers
       return (
-        <div key={index} className="space-y-2 leading-relaxed">
+        <div key={index} className="space-y-2 leading-relaxed text-[#0F172A]">
           {part
             .trim()
             .split('\n\n')
             .map((paragraph, pIdx) => {
               if (paragraph.startsWith('### ')) {
                 return (
-                  <h4 key={pIdx} className="text-sm font-semibold text-slate-200 mt-4 mb-2">
+                  <h4 key={pIdx} className="text-sm font-bold text-[#0F172A] mt-4 mb-2">
                     {paragraph.replace('### ', '')}
                   </h4>
                 );
               }
               if (paragraph.startsWith('1. ') || paragraph.startsWith('2. ') || paragraph.startsWith('3. ')) {
                 return (
-                  <div key={pIdx} className="text-sm text-slate-300 pl-2">
+                  <div key={pIdx} className="text-sm text-slate-700 pl-2">
                     {paragraph}
                   </div>
                 );
               }
               return (
-                <p key={pIdx} className="text-sm text-slate-200 whitespace-pre-wrap">
+                <p key={pIdx} className="text-sm text-[#0F172A] whitespace-pre-wrap">
                   {paragraph}
                 </p>
               );
@@ -78,7 +76,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   return (
     <div
       className={`w-full py-4 px-4 sm:px-6 transition-colors ${
-        isAssistant ? 'bg-[#10131C]/60' : 'bg-transparent'
+        isAssistant ? 'bg-[#F8FAFC]/70 border-y border-slate-100' : 'bg-white'
       }`}
     >
       <div className="max-w-3xl mx-auto flex items-start gap-4">
@@ -91,11 +89,11 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
         <div className="flex-1 min-w-0 space-y-2">
           {/* Header info */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-300">
+            <span className="text-xs font-bold text-[#0F172A]">
               {isAssistant ? 'MOOSE AI' : 'You'}
             </span>
             {isAssistant && (
-              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-[#1646D8] border border-blue-200">
                 Moose-7B
               </span>
             )}
@@ -103,7 +101,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
           </div>
 
           {/* Body */}
-          <div className="text-sm text-slate-200 break-words leading-relaxed space-y-3">
+          <div className="text-sm text-[#0F172A] break-words leading-relaxed space-y-3">
             {renderFormattedContent(message.content)}
           </div>
 
@@ -112,13 +110,13 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
             <div className="pt-2 flex items-center gap-2 select-none">
               <button
                 onClick={handleCopyMessage}
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 px-2 py-1 rounded-lg hover:bg-[#1A1F2D] transition-colors"
+                className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
                 title="Copy response"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400">Copied</span>
+                    <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-emerald-600 font-medium">Copied</span>
                   </>
                 ) : (
                   <>
@@ -130,10 +128,10 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
 
               <button
                 onClick={() => setLiked(liked === true ? null : true)}
-                className={`p-1.5 rounded-lg transition-colors ${
+                className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                   liked === true
-                    ? 'text-sky-400 bg-sky-500/10'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-[#1A1F2D]'
+                    ? 'text-[#1646D8] bg-blue-50 border border-blue-200'
+                    : 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
                 }`}
                 title="Good response"
               >
@@ -142,10 +140,10 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
 
               <button
                 onClick={() => setLiked(liked === false ? null : false)}
-                className={`p-1.5 rounded-lg transition-colors ${
+                className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                   liked === false
-                    ? 'text-red-400 bg-red-500/10'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-[#1A1F2D]'
+                    ? 'text-red-500 bg-red-50 border border-red-200'
+                    : 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
                 }`}
                 title="Bad response"
               >
@@ -159,7 +157,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   );
 };
 
-// Reusable CodeBlock component with copy functionality
+// Clean, high-readability Light-Theme CodeBlock component
 const CodeBlock: React.FC<{ code: string; language: string }> = ({
   code,
   language,
@@ -175,20 +173,20 @@ const CodeBlock: React.FC<{ code: string; language: string }> = ({
   };
 
   return (
-    <div className="my-3 rounded-xl overflow-hidden border border-slate-700/80 bg-[#0B0E14] shadow-md">
+    <div className="my-3 rounded-xl overflow-hidden border border-slate-200 bg-[#F8FAFC] shadow-xs">
       {/* Code Header */}
-      <div className="flex items-center justify-between px-3.5 py-1.5 bg-[#141822] border-b border-slate-800 text-xs text-slate-400 select-none">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-slate-300">
+      <div className="flex items-center justify-between px-3.5 py-1.5 bg-[#F1F5F9] border-b border-slate-200 text-xs text-slate-600 select-none">
+        <span className="font-mono text-[11px] uppercase tracking-wider font-semibold text-slate-700">
           {language}
         </span>
         <button
           onClick={handleCopyCode}
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+          className="flex items-center gap-1.5 text-xs text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400 text-[11px]">Copied!</span>
+              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-emerald-600 text-[11px] font-medium">Copied!</span>
             </>
           ) : (
             <>
@@ -199,8 +197,8 @@ const CodeBlock: React.FC<{ code: string; language: string }> = ({
         </button>
       </div>
 
-      {/* Code Area */}
-      <pre className="p-3.5 overflow-x-auto text-xs font-mono text-slate-200 leading-relaxed bg-[#0B0E14]">
+      {/* Code Area: Light grey background with dark navy text and clean spacing */}
+      <pre className="p-3.5 overflow-x-auto text-xs font-mono text-[#0F172A] leading-relaxed bg-[#F8FAFC] custom-scrollbar">
         <code>{code}</code>
       </pre>
     </div>

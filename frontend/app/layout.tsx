@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   description:
     'A clean, modern, premium AI chatbot interface built for fine-tuned open-source language models. Computer Science Major Project.',
   icons: {
-    icon: '/moose-avatar.png',
+    icon: '/moose-logo.png',
+    apple: '/moose-logo.png',
   },
 };
 
@@ -16,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark h-full">
-      <body className="h-full bg-[#0B0E14] text-slate-100 flex flex-col antialiased">
+    <html lang="en" className="h-full light">
+      <body className="h-full bg-white text-slate-900 flex flex-col antialiased">
         {children}
       </body>
     </html>

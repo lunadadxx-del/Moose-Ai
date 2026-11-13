@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { APP_CONFIG } from '@/lib/constants';
-import { Paperclip, Mic, ArrowUp, Sparkles } from 'lucide-react';
+import { Paperclip, Mic, ArrowUp } from 'lucide-react';
 
 interface MessageInputProps {
   onSendMessage: (content: string) => void;
@@ -56,9 +56,9 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 pb-4 select-none">
-      {/* Floating Modern Input Box */}
-      <div className="relative rounded-2xl bg-[#141824] border border-slate-700/70 hover:border-slate-600/80 focus-within:border-sky-500/60 focus-within:ring-2 focus-within:ring-sky-500/20 shadow-xl shadow-black/40 transition-all duration-200">
+    <div className="w-full max-w-3xl mx-auto px-4 pb-4 select-none bg-white">
+      {/* Floating Light-Theme Input Box */}
+      <div className="relative rounded-2xl bg-white border border-slate-200 hover:border-slate-300 focus-within:border-[#1646D8] focus-within:ring-3 focus-within:ring-[#1646D8]/15 shadow-sm transition-all duration-200">
         <form onSubmit={handleSubmit} className="flex flex-col">
           {/* Text Area */}
           <textarea
@@ -69,7 +69,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
             disabled={disabled}
             placeholder={placeholder}
             rows={1}
-            className="w-full bg-transparent px-4 pt-3.5 pb-2 text-sm text-slate-100 placeholder-slate-400 resize-none outline-none max-h-48 custom-scrollbar leading-relaxed"
+            className="w-full bg-transparent px-4 pt-3.5 pb-2 text-sm text-[#0F172A] placeholder-slate-400 resize-none outline-none max-h-48 custom-scrollbar leading-relaxed"
           />
 
           {/* Action Row: Left Icons + Right Send Button */}
@@ -79,7 +79,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
               <button
                 type="button"
                 onClick={handleAttachmentClick}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-[#1E2435] transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
                 title="Attach document or image (Phase 2 RAG)"
                 aria-label="Attach file"
               >
@@ -89,7 +89,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
               <button
                 type="button"
                 onClick={handleVoiceClick}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-[#1E2435] transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
                 title="Voice input (Phase 2)"
                 aria-label="Voice input"
               >
@@ -108,8 +108,8 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                 disabled={!input.trim() || disabled}
                 className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 ${
                   input.trim() && !disabled
-                    ? 'bg-gradient-to-r from-sky-500 to-indigo-600 text-white shadow-md shadow-sky-500/30 hover:scale-105 active:scale-95 cursor-pointer'
-                    : 'bg-[#1C2130] text-slate-500 cursor-not-allowed'
+                    ? 'bg-gradient-to-r from-[#1646D8] to-[#16A5F5] text-white shadow-sm shadow-blue-500/25 hover:scale-105 active:scale-95 cursor-pointer'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                 }`}
                 aria-label="Send message"
               >

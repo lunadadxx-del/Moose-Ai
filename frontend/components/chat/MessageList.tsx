@@ -16,7 +16,7 @@ export const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex-1 overflow-y-auto py-4 space-y-1 custom-scrollbar">
+    <div className="flex-1 overflow-y-auto py-4 space-y-1 custom-scrollbar bg-white">
       {messages.map((msg) => (
         <MessageItem key={msg.id} message={msg} />
       ))}

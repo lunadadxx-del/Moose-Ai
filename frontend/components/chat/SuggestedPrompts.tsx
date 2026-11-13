@@ -15,15 +15,15 @@ export const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({
   const getIcon = (type: SuggestedPrompt['icon']) => {
     switch (type) {
       case 'lightbulb':
-        return <Lightbulb className="w-5 h-5 text-amber-400" />;
+        return <Lightbulb className="w-5 h-5 text-amber-500" />;
       case 'code':
-        return <Code2 className="w-5 h-5 text-sky-400" />;
+        return <Code2 className="w-5 h-5 text-[#1646D8]" />;
       case 'file-text':
-        return <FileText className="w-5 h-5 text-purple-400" />;
+        return <FileText className="w-5 h-5 text-indigo-500" />;
       case 'compass':
-        return <Compass className="w-5 h-5 text-emerald-400" />;
+        return <Compass className="w-5 h-5 text-emerald-600" />;
       default:
-        return <Lightbulb className="w-5 h-5 text-sky-400" />;
+        return <Lightbulb className="w-5 h-5 text-[#1646D8]" />;
     }
   };
 
@@ -33,20 +33,20 @@ export const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({
         <button
           key={item.id}
           onClick={() => onSelectPrompt(item.prompt)}
-          className="group relative flex flex-col justify-between p-4 rounded-2xl bg-[#141824]/90 hover:bg-[#1B2132] border border-slate-800/80 hover:border-slate-700/80 text-left transition-all duration-200 hover:shadow-lg hover:shadow-cyan-950/20 hover:-translate-y-0.5 cursor-pointer"
+          className="group relative flex flex-col justify-between p-4 rounded-2xl bg-white hover:bg-slate-50/80 border border-slate-200 hover:border-blue-300 text-left transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-blue-500/5 hover:-translate-y-0.5 cursor-pointer"
         >
           <div className="flex items-start justify-between w-full mb-2">
-            <div className="p-2 rounded-xl bg-[#191F2F] border border-slate-700/50 group-hover:border-slate-600 transition-colors">
+            <div className="p-2 rounded-xl bg-slate-100/80 border border-slate-200/60 group-hover:bg-white group-hover:border-blue-200 transition-colors">
               {getIcon(item.icon)}
             </div>
-            <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-sky-400 transition-colors opacity-0 group-hover:opacity-100" />
+            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#1646D8] transition-colors opacity-0 group-hover:opacity-100" />
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-slate-200 group-hover:text-white transition-colors">
+            <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1646D8] transition-colors">
               {item.title}
             </h3>
-            <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+            <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
               {item.description}
             </p>
           </div>
