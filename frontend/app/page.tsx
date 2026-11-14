@@ -22,6 +22,7 @@ export default function Home() {
     messages,
     activeSessionId,
     isDemoActive,
+    isLoading,
     sendMessage,
     resetChat,
     toggleDemo,
@@ -75,7 +76,7 @@ export default function Home() {
 
           {/* Large Centered Input Box */}
           <div className="shrink-0 w-full pt-1 bg-white">
-            <MessageInput onSendMessage={sendMessage} />
+            <MessageInput onSendMessage={sendMessage} disabled={isLoading} />
           </div>
         </div>
       </main>
